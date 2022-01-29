@@ -1,4 +1,6 @@
-def call(){
+def call(String pipelineType){
+    figlet pipelineType
+    
     stage('compile') {
         STAGE=env.STAGE_NAME
         sh './mvnw clean compile -e'

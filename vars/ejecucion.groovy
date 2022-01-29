@@ -22,14 +22,17 @@ def call(){
                   script {
                       print("Pipeline")
                       print params.buildTool
+			  
+		      def ci_or_cd = verifyBranchName()
+			  
                       if (params.buildTool == 'gradle') {
                           println 'ejeutar gradle'
                           def ejecucion = load 'gradle.groovy'
-                          gradle()
+                          gradle(verifyBranchName())
                       } else {
                           println 'ejecutar maven'
                           def ejecucion = load 'maven.groovy'
-                          maven()
+                          maven(verifyBranchName())
                       }
                   }
               }
@@ -46,6 +49,10 @@ def call(){
         }
       }
   }
+}
+
+def verifyBranchName () {
+     return (env.GIT_BRANCH.contains('feature') || env.GIT_BRANCH.contains('develop')) ? 'CI' : 'CD'
 }
 
 return this;

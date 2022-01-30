@@ -20,6 +20,7 @@ def call(){
           stage('Pipeline') {
               steps {
                   script {
+		      sh 'printenv'
                       print("Pipeline")
                       print params.buildTool
 //		      print STAGE

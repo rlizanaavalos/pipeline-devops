@@ -13,7 +13,6 @@ def call(){
         }
 
         parameters {
-            string 'stage'
             choice choices: ['gradle', 'maven'], name: 'buildTool'
         }
         stages {
@@ -21,14 +20,11 @@ def call(){
                 steps {
                     script {
                         print("Pipeline")
-                        print params.buildTool
-                        print formatInputStage(params.stage)
+                        figlet params.buildTool
                         if (params.buildTool == 'gradle') {
-                            println 'ejeutar gradle'
-                            gradle(formatInputStage(params.stage))
+                            gradle(verifyBranchName())
                         } else {
-                            println 'ejecutar maven'
-                            maven(formatInputStage(params.stage))
+                            maven(verifyBranchName())
                         }
                     }
                 }
@@ -47,11 +43,12 @@ def call(){
     }
 }
 
-def formatInputStage (String stages) {
-    if (stages.length() > 0) {
-        return stages.split(';');
+def verifyBranchName () {
+    if (env.GIT_BRANCH.contains('feature-') || env.GIT_BRANCH.contains('develop')) {
+        return 'CI'
+    } else {
+        return 'CD'
     }
-    return null
 }
 
 return this;

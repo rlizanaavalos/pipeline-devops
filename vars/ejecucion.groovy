@@ -22,6 +22,9 @@ def call(){
                   script {
                       print("Pipeline")
                       print params.buildTool
+			  
+		      def ci_or_cd = verifyBranchName()
+			  
                       if (params.buildTool == 'gradle') {
                           println 'ejeutar gradle'
                           gradle()
@@ -44,6 +47,10 @@ def call(){
         }
       }
   }
+}
+
+def verifyBranchName () {
+     return (env.GIT_BRANCH.contains('feature') || env.GIT_BRANCH.contains('develop')) ? 'CI' : 'CD'
 }
 
 return this;

@@ -4,7 +4,7 @@ def call(String pipelineType){
 
     stage('Compile') {
 	print("stage: {$STAGE}")
-        STAGE=env.STAGE_NAME
+        env.STAGE=env.STAGE_NAME
         sh 'chmod a+x gradlew'
         sh './gradlew build'
     }

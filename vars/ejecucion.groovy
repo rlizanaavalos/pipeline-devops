@@ -24,11 +24,9 @@ def call(){
                       print params.buildTool
                       if (params.buildTool == 'gradle') {
                           println 'ejeutar gradle'
-                          def ejecucion = load 'gradle.groovy'
                           gradle()
                       } else {
                           println 'ejecutar maven'
-                          def ejecucion = load 'maven.groovy'
                           maven()
                       }
                   }

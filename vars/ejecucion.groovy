@@ -8,6 +8,8 @@ def call(){
 
   pipeline {
       agent any
+
+      env.STAGE = ''
       
       environment {
           STAGE = ''

@@ -8,8 +8,6 @@ def call(){
 
   pipeline {
       agent any
-
-      env.STAGE = ''
       
       environment {
           STAGE = ''
@@ -46,7 +44,7 @@ def call(){
         }
         // triggered when red sign
         failure {
-              slackSend color: 'danger', channel: 'U02MU77P45S', message: "Build Failed: Rodrigo Lizana ${env.JOB_NAME} ${params.buildTool} Ejecución fallida en stage ${env.STAGE}", tokenCredentialId: 'slack-token-devops'
+              slackSend color: 'danger', channel: 'U02MU77P45S', message: "Build Failed: Rodrigo Lizana ${env.JOB_NAME} ${params.buildTool} Ejecución fallida en stage ${STAGE}", tokenCredentialId: 'slack-token-devops'
         }
       }
   }

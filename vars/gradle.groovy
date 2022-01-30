@@ -3,7 +3,7 @@ def call(String pipelineType){
     figlet pipelineType
 
     stage('Compile') {
-        env.STAGE=env.STAGE_NAME
+        STAGE=env.STAGE_NAME
         sh 'chmod a+x gradlew'
         sh './gradlew build'
     }

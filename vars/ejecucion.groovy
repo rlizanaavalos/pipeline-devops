@@ -22,6 +22,7 @@ def call(){
                   script {
                       print("Pipeline")
                       print params.buildTool
+		      print STAGE
 			  
 		      def ci_or_cd = verifyBranchName()
 			  
